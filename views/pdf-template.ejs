@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            width: 100%;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .hospital-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .patient-details {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Lifeline Healthcare Pvt Ltd</h1>
+            <h3>Lifeline Tealth Trust</h3>
+            <p>Rathbari, Malda, West Bengal-732101, India</p>
+        </div>
+        <div class="hospital-name">
+            <h1>OPD Patient Card</h1>
+        </div>
+        <div class="patient-details">
+            <p><strong>Name:</strong>
+                <%= patient.name %>
+            </p>
+            <p><strong>Age:</strong>
+                <%= patient.age %>
+            </p>
+            <p><strong>Gender:</strong>
+                <%= patient.gender %>
+            </p>
+            <p><strong>Doctor:</strong>
+                <%= patient.doctor %>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
