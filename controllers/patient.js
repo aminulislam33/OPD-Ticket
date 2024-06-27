@@ -4,13 +4,14 @@ const path = require('path');
 const ejs = require('ejs');
 
 async function handleBookAppointment(req, res) {
-  const { name, age, gender, doctor } = req.body;
+  const { name, age, gender, doctor, date } = req.body;
   try {
     const patient = await Patients.create({
       name,
       age,
       gender,
-      doctor
+      doctor,
+      date
     });
 
     res.redirect(`/patient/appointment/${patient._id}`);
@@ -25,13 +26,15 @@ async function handlePdfGeneration(req, res) {
     const patient = await Patients.findById(patientId);
     
     if (!patient) {
-      return res.status(404).send('Patient not found');
+      return res.status(404).send('Patient not found (handlePdfGeneration)');
     }
     
     const hospitalName = 'Lifeline Healthcare Pvt Ltd';
-    res.render('patient-details', { hospitalName, patient, patientId });
+    const appointmentDate = new Date(patient.date)
+    console.log(appointmentDate)
+    res.render('patient-details', { hospitalName, patient, appointmentDate, patientId });
   } catch (error) {
-    res.status(500).send('An error occurred');
+    res.status(500).send('An error occurred at handlePdfGeneration');
   }
 }
 
@@ -41,7 +44,7 @@ async function handlePdfDownload(req, res) {
     const patient = await Patients.findById(patientId);
     
     if (!patient) {
-      return res.status(404).send('Patient not found');
+      return res.status(404).send('Patient not found (handlePdfDownload)');
     }
 
     const hospitalName = 'Lifeline Healthcare Pvt Ltd';
@@ -58,7 +61,7 @@ async function handlePdfDownload(req, res) {
       stream.pipe(res);
     });
   } catch (error) {
-    res.status(500).send('An error occurred');
+    res.status(500).send('An error occurred at handlePdfDownload');
   }
 }
 

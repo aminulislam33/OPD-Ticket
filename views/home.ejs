@@ -43,6 +43,7 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
+            border-top: 4px solid #007BFF;
         }
 
         form {
@@ -60,10 +61,12 @@
             margin-top: 10px;
             font-weight: bold;
             align-self: flex-start;
+            color: #007BFF;
         }
 
         input[type="text"],
-        select {
+        select,
+        input[type="date"] {
             margin-top: 5px;
             padding: 10px;
             border: 1px solid #ccc;
@@ -71,6 +74,14 @@
             font-size: 16px;
             width: 100%;
             box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        input[type="date"]:focus {
+            border-color: #007BFF;
+            outline: none;
         }
 
         button {
@@ -83,23 +94,30 @@
             font-size: 16px;
             cursor: pointer;
             width: 100%;
+            transition: background-color 0.3s;
         }
 
         button:hover {
             background-color: #0056b3;
         }
-        .container {
-            border-top: 4px solid #007BFF;
-        }
 
-        label {
-            color: #007BFF;
-        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                max-width: 90%;
+            }
 
-        input[type="text"]:focus,
-        select:focus {
-            border-color: #007BFF;
-            outline: none;
+            input[type="text"],
+            select,
+            input[type="date"] {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -112,32 +130,33 @@
     <div class="container">
         <h5>OPD Ticket Booking System</h5>
         <form action="/patient/appointment" method="post">
-            <label>Your Name:</label>
-            <input type="text" name="name" placeholder="Enter Name">
-            <label>Age:</label>
-            <input type="text" name="age" placeholder="Enter Age">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter Name" required>
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" placeholder="Enter Age" required>
             <label for="gender">Gender:</label>
-            </select>
-            <select name="gender" id="gender">
+            <select name="gender" id="gender" required>
                 <option value="" disabled selected>Select</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
             </select>
-            <label>Speciality, Doctor's Name</label>
-            <select name="doctor" id="doctor">
+            <label for="doctor">Speciality, Doctor's Name:</label>
+            <select name="doctor" id="doctor" required>
                 <option value="" disabled selected>Select</option>
                 <option value="General-physician">General Physician</option>
                 <option value="General-surgeon">General Surgeon</option>
                 <option value="Gynaecology">Gynaecology</option>
                 <option value="Neurology">Neurology</option>
                 <option value="Nephrology">Nephrology</option>
-                <option value="Opthalmology">Opthalmology</option>
+                <option value="Ophthalmology">Ophthalmology</option>
                 <option value="Orthopedics">Orthopedics</option>
-                <option value="Eurology">Eurology</option>
+                <option value="Urology">Urology</option>
                 <option value="Ent">ENT</option>
                 <option value="Dermatology">Dermatology</option>
             </select>
-                <button type="submit">Submit</button>
+            <label for="date">Appointment Date:</label>
+            <input type="date" id="date" name="date" required>
+            <button type="submit">Submit</button>
         </form>
     </div>
 </body>
