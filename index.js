@@ -17,6 +17,9 @@ app.set("views", path.resolve("./views"));
 
 app.use(express.urlencoded({ extended: false }));
 app.use("/patient", patientRouter);
+app.get("/", (req,res)=>{
+  res.render("home");
+});
 
 app.listen(PORT, () => {
   console.log(`server started on ${PORT}`);
