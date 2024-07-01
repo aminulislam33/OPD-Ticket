@@ -13,6 +13,10 @@ const AppointmentSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    mobile: {
+        type: Number,
+        required: true,
+    },
     doctor: {
         type: String,
         required: true,

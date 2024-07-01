@@ -4,12 +4,13 @@ const path = require('path');
 const ejs = require('ejs');
 
 async function handleBookAppointment(req, res) {
-  const { name, age, gender, doctor, date } = req.body;
+  const { name, age, gender, mobile, doctor, date } = req.body;
   try {
     const patient = await Patients.create({
       name,
       age,
       gender,
+      mobile,
       doctor,
       date
     });
