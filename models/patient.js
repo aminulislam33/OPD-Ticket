@@ -27,6 +27,6 @@ const AppointmentSchema = mongoose.Schema({
     }
 }, {timestamps: true});
 
-const Patients = mongoose.model("Patients", AppointmentSchema);
+const Patients = mongoose.model("patients", AppointmentSchema);
 
 module.exports = Patients;

@@ -1,95 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Details</title>
+    <title>OPD Patient Card</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+        .a4-size {
+            width: 210mm;
+            height: 297mm;
+            border: 1px solid #ddd;
+            margin: 20px auto;
+            padding: 10mm;
+            box-sizing: border-box;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-
-        .header {
+        .divfooter {
+            position: absolute;
+            bottom: 5mm;
+            left: 0;
+            width: 100%;
             text-align: center;
-            margin-bottom: 20px;
+            opacity: 0.6;
         }
-
-        .hospital-name {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
+        hr {
+            border-top: 2px solid #5f6972;
         }
-
-        .patient-details {
-            margin-bottom: 20px;
-        }
-
         .button-container {
-            text-align: center;
-            margin-top: 20px;
+            text-align: right;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            margin-right: 10px;
         }
-
-        .button-container button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
+        .footer {
+            background-color: #343a40; /* Dark background */
+            color: #ffffff; /* Light text color */
+            padding: 20px 0; /* Padding top and bottom */
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Lifeline Healthcare Pvt Ltd</h1>
-            <h3>Lifeline Tealth Trust</h3>
-            <p>Rathbari, Malda, West Bengal-732101, India</p>
+<%- include("./partials/nav") %>
+<div class="button-container">
+    <button type="button" class="btn btn-outline-warning" onclick="downloadPDF()">Download</button>
+</div>
 
-        </div>
-        <div class="hospital-name">
-            <h4>OPD Patient Card</h4>
-        </div>
-        <div class="patient-details">
-            <p><strong>Name:</strong>
-                <%= patient.name %>
-            </p>
-            <p><strong>Age:</strong>
-                <%= patient.age %>
-            </p>
-            <p><strong>Gender:</strong>
-                <%= patient.gender %>
-            </p>
-            <p><strong>Mobile Number:</strong>
-                <%= patient.mobile %>
-            </p>
-            <p><strong>Doctor:</strong>
-                <%= patient.doctor %>
-            </p>
-            <p><strong>Visit Date:</strong>
-                <%= appointmentDate %>
-            </p>
-        </div>
-        <div class="button-container">
-            <button onclick="window.print()">Print</button>
-            <button onclick="downloadPage('<%= patientId %>')">Download</button>
+<div class="container a4-size" id="card-content">
+    <div class="header text-center">
+        <h3>LMBT Healthcare Pvt Ltd</h3>
+        <h4>LMBT Health Trust</h4>
+        <h6>Rathbari, Malda, West Bengal-732101, India</h6>
+    </div>
+
+    <hr>
+
+    <div class="text-center mt-4">
+        <h6 class="card-title">OPD Patient Card</h6>
+    </div>
+
+    <div class="patient-info mt-4">
+        <div class="row">
+            <div class="col-sm-6">
+                <p><strong>Name:</strong> <%= patient.name %></p>
+                <p><strong>Age:</strong> <%= patient.age %></p>
+                <p><strong>Gender:</strong> <%= patient.gender %></p>
+            </div>
+            <div class="col-sm-6">
+                <p><strong>Mobile Number:</strong> <%= patient.mobile %></p>
+                <p><strong>Doctor:</strong> Dr. Smith</p>
+                <p><strong>Visit Date:</strong> <%= appointmentDate %></p>
+            </div>
         </div>
     </div>
-    <script>
-        function downloadPage(patientId) {
-            window.location.href = `/patient/appointment/${patientId}/download-pdf`;
-        }
-    </script>
-</body>
 
+    <hr>
+
+    <div class="divfooter">
+        &copy; 2024 LMBT Healthcare Pvt Ltd. All Rights Reserved.
+    </div>
+</div>
+<footer class="footer text-white text-center bg-dark">
+    <div class="container">
+        <p>&copy; 2024 LMBT Healthcare Pvt Ltd. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+    function downloadPDF() {
+        const element = document.getElementById('card-content');
+        html2pdf().from(element).save('OPD_Patient_Card.pdf');
+    }
+</script>
+
+</body>
 </html>

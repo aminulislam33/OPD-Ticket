@@ -1,10 +1,9 @@
 const express = require('express');
-const router = express.Router();
-const {checkAuth} = require('../services/auth')
 const { handleBookAppointment, handlePdfGeneration, handlePdfDownload } = require('../controllers/patient');
+const router = express.Router();
 
-router.post('/appointment', checkAuth, handleBookAppointment);
-router.get('/appointment/:patientId', checkAuth, handlePdfGeneration);
-router.get('/appointment/:patientId/download-pdf', checkAuth, handlePdfDownload);
+router.post('/appointment',  handleBookAppointment);
+router.get('/appointment', (req,res)=>{return res.render("book-appointment")});
+router.get('/appointment/:patientId',  handlePdfGeneration);
 
 module.exports = router;

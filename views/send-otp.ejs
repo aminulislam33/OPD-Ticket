@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verfy Mobile Number</title>
-</head>
-<body>
-    <div class="container">
-        <form action="/twilio-sms/send-otp" method="post">
-            <label for="">Mobile Number: </label>
-            <input type="number" name="phoneNumber" placeholder="Enter Mobile Number" required>
-            <button type="submit">Send OTP</button>
-        </form>
-    </div>
-</body>
+<%- include("./partials/head") %>
+    <%- include("./partials/nav-style") %>
+
+        <body>
+            <%- include("./partials/nav") %>
+                <div class="container d-flex justify-content-center align-items-center vh-100">
+                    <div class="card p-4">
+                        <h3 class="text-center mb-4">Login</h3>
+                        <div id="error-message" class="text-center text-danger mb-3"></div>
+                        <form id="loginForm" action="/user/login" method="POST">
+                            <div class="form-group">
+                                <label for="phoneNumber">Mobile Number</label>
+                                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
+                                    placeholder="Enter your mobile number" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Send OTP</button>
+                        </form>
+                    </div>
+                </div>
+            <%- include("./partials/script") %>
+            <script>
+                document.getElementById('loginForm').addEventListener('submit', function(event) {
+                    var phoneNumber = document.getElementById('phoneNumber').value;
+                    var phonePattern = /^\d{10}$/;
+                    var errorMessage = document.getElementById('error-message');
+
+                    if (!phonePattern.test(phoneNumber)) {
+                        event.preventDefault(); 
+                        errorMessage.textContent = 'Please enter a valid mobile number.';
+                    } else {
+                        errorMessage.textContent = ''; 
+                    }
+                });
+            </script>
+        </body>
 </html>

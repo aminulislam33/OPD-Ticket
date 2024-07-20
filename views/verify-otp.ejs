@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Mobile Number</title>
-</head>
-<body>
-    <div class="container">
-        <form action="/twilio-sms/verify-otp" method="post">
-            <label for="">OTP: </label>
-            <input type="number" name="otp" placeholder="Enter OTP" required>
-            <button type="submit">Verify</button>
-        </form>
-    </div>
-</body>
+<%- include("./partials/head") %>
+    <%- include("./partials/nav-style") %>
+
+        <body>
+            <%- include("./partials/nav") %>
+                <div class="container d-flex justify-content-center align-items-center vh-100">
+                    <div class="card p-4">
+                        <h3 class="text-center mb-4">Login</h3>
+                        <form id="loginForm" action="/user/login" method="POST">
+                            <div class="form-group">
+                                <label for="phoneNumber">One Time Password(OTP)</label>
+                                <input type="tel" class="form-control" id="phoneNumber" name="otp"
+                                    placeholder="Enter OTP" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            <%- include("./partials/script") %>
+        </body>
 </html>

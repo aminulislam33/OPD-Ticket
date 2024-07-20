@@ -1,5 +1,0 @@
-HOW MY CODE WORKS:
-
-1. there is global variable countryCode = 91
-2. user inputs mobileNumber and set it to session
-3. while verifying mobileNumber fethch from session and countryCode from global variable and user input otp
